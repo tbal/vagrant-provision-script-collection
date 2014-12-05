@@ -9,6 +9,6 @@ echo ">>> Setting Timezone to $TIMEZONE"
 echo "$TIMEZONE" | tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 
-PACKAGES="htop vim curl"
+PACKAGES="vim curl htop tree"
 echo ">>> Installing packages: $PACKAGES"
 apt-get install -qq $PACKAGES
