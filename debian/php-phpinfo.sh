@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-FILE_NAME="phpinfo.php"
-DEST_DIR="/var/www"
+PHPINFO_FILENAME="phpinfo.php"
+PHPINFO_DESTINATION_DIR="/var/www"
 
-echo ">>> Adding $FILE_NAME to $DEST_DIR"
-mkdir -p $DEST_DIR
-echo "<?php phpinfo() ?>" > "$DEST_DIR/$FILE_NAME"
+echo ">>> Adding $PHPINFO_FILENAME to $PHPINFO_DESTINATION_DIR"
+mkdir -p $PHPINFO_DESTINATION_DIR
+echo "<?php phpinfo() ?>" > "$PHPINFO_DESTINATION_DIR/$PHPINFO_FILENAME"
