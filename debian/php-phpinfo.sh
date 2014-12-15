@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-PHPINFO_FILENAME="phpinfo.php"
-PHPINFO_DESTINATION_DIR="/var/www"
+[ -z "$PHPINFO_FILENAME"        ] && PHPINFO_FILENAME="phpinfo.php"
+[ -z "$PHPINFO_DESTINATION_DIR" ] && PHPINFO_DESTINATION_DIR="/var/www"
 
 echo ">>> Adding $PHPINFO_FILENAME to $PHPINFO_DESTINATION_DIR"
 mkdir -p $PHPINFO_DESTINATION_DIR
