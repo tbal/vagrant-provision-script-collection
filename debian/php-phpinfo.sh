@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 FILE_NAME="phpinfo.php"
 DEST_DIR="/var/www"
