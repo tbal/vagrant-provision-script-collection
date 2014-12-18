@@ -18,7 +18,6 @@ source "$BASEDIR/../apache.sh"
 source "$BASEDIR/../php.sh"
 source "$BASEDIR/../mysql.sh"
 source "$BASEDIR/../php-mysql.sh"
-source "$BASEDIR/../php-xdebug.sh"
 
 
 ###
