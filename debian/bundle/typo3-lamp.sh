@@ -61,5 +61,4 @@ VHOST_LINK_DESTINATION="/etc/apache2/sites-enabled/typo3"
 
 
 # restart apache
-echo ">>> Restarting apache2 webserver"
-/etc/init.d/apache2 restart
+source "$BASEDIR/../apache-restart.sh"
