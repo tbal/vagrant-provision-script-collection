@@ -100,7 +100,7 @@ for SCRIPT in $SCRIPTS; do
     if [ $? -eq 0 ]; then
         echo -e "\033[32mTest for '$SCRIPT' was successful.\033[m"
     else
-        echo -e "\033[31mERROR: Test execution of '$SCRIPT' failed!\033[m"
+        echo -e "\033[31mERROR: Test execution of '$SCRIPT' failed!\033[m" 1>&2
         exit 1
     fi
 done
