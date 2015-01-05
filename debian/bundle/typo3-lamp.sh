@@ -14,6 +14,7 @@ BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 ##
 echo $BASEDIR
 source "$BASEDIR/../base.sh"
+source "$BASEDIR/../common.sh"
 source "$BASEDIR/../apache.sh"
 source "$BASEDIR/../php.sh"
 source "$BASEDIR/../mysql.sh"
