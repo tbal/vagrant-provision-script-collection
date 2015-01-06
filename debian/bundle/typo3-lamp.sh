@@ -12,7 +12,6 @@ BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 ###
 # BASE
 ##
-echo $BASEDIR
 source "$BASEDIR/../base.sh"
 source "$BASEDIR/../common.sh"
 source "$BASEDIR/../apache.sh"
