@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-[ -z "$TYPO3_DB_NAME"     ] && TYPO3_DB_NAME="typo3"
-[ -z "$TYPO3_DB_USER"     ] && TYPO3_DB_USER="typo3"
-[ -z "$TYPO3_DB_PASSWORD" ] && TYPO3_DB_PASSWORD="typo3"
+[ -z "$TYPO3_DB_NAME"      ] && TYPO3_DB_NAME="typo3"
+[ -z "$TYPO3_DB_USER"      ] && TYPO3_DB_USER="typo3"
+[ -z "$TYPO3_DB_PASSWORD"  ] && TYPO3_DB_PASSWORD="typo3"
 [ -z "$PROJECT_VHOST_FILE" ] && PROJECT_VHOST_FILE="/vagrant/conf/httpd-vhost.vagrant.conf"
+[ -z "$PROJECT_VHOST_NAME" ] && PROJECT_VHOST_NAME="typo3"
 
 
 BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
@@ -55,7 +56,7 @@ apt-get install -qq $INSTALL_PHP_MODULES
 
 # link apache vhost
 echo ">>> Linking projects apache vhost config if it exists"
-VHOST_LINK_DESTINATION="/etc/apache2/sites-enabled/typo3"
+VHOST_LINK_DESTINATION="/etc/apache2/sites-enabled/$PROJECT_VHOST_NAME"
 [ -f "$PROJECT_VHOST_FILE" ] && [ ! -f "$VHOST_LINK_DESTINATION" ] \
     && ln -fs "$PROJECT_VHOST_FILE" "$VHOST_LINK_DESTINATION"
 
