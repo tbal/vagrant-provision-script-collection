@@ -38,7 +38,7 @@ else
     if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
         mysql -uroot -e "$MYSQL_QUERY"
     else
-        mysql -uroot -p"$MYSQL_ROOT_USER" -e "$MYSQL_QUERY"
+        mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -e "$MYSQL_QUERY"
     fi
 fi
 
