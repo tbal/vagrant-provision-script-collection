@@ -10,3 +10,7 @@ fi
 
 echo ">>> Installing mysql-server and mysql-client"
 apt-get install -qq mysql-server mysql-client
+
+# force restart to avoid the following connection problem:
+#   ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var/run/mysqld/mysqld.sock’ (2)
+/etc/init.d/mysql restart
