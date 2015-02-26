@@ -102,6 +102,7 @@ for SCRIPT in $SCRIPTS; do
         # actually run prepared command in docker container
         docker run \
             -t -i \
+            --rm \
             -v "$DOCKER_MOUNT_HOST":"$DOCKER_MOUNT_GUEST" \
             $DOCKER_CONTAINER \
             /usr/bin/env bash -c "$DOCKER_EXECUTE_CMD"
