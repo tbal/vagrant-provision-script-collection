@@ -4,6 +4,8 @@ set -e
 [ -z "$TYPO3_DB_NAME"      ] && TYPO3_DB_NAME="typo3"
 [ -z "$TYPO3_DB_USER"      ] && TYPO3_DB_USER="typo3"
 [ -z "$TYPO3_DB_PASSWORD"  ] && TYPO3_DB_PASSWORD="typo3"
+[ -z "$APACHE_USER"        ] && APACHE_USER="vagrant"
+[ -z "$APACHE_GROUP"       ] && APACHE_GROUP="www-data"
 [ -z "$PROJECT_VHOST_FILE" ] && PROJECT_VHOST_FILE="/vagrant/conf/httpd-vhost.vagrant.conf"
 [ -z "$PROJECT_VHOST_NAME" ] && PROJECT_VHOST_NAME="typo3"
 
@@ -61,5 +63,19 @@ VHOST_LINK_DESTINATION="/etc/apache2/sites-enabled/$PROJECT_VHOST_NAME"
     && ln -fs "$PROJECT_VHOST_FILE" "$VHOST_LINK_DESTINATION"
 
 
-# restart apache
-source "$BASEDIR/../apache-restart.sh"
+# stop apache
+service apache2 stop
+
+
+# overwrite apache2 run user setting
+sed -i "s/APACHE_RUN_USER=.*$/APACHE_RUN_USER=$APACHE_USER/g" /etc/apache2/envvars
+
+# overwrite apache2 run group setting
+sed -i "s/APACHE_RUN_GROUP=.*$/APACHE_RUN_GROUP=$APACHE_GROUP/g" /etc/apache2/envvars
+
+# change apache2 lock dir owner
+chown $APACHE_USER /var/lock/apache2/
+
+
+# start apache
+service apache2 start
