@@ -40,7 +40,8 @@ cat $SOLR_TOMCAT_INSTALL_SCRIPT \
   -e "s/mirror.dkd.de\/apache\/lucene\/solr/archive.apache.org\/dist\/lucene\/solr/g" \
 > /tmp/install-solr-tomcat.sh \
 && chmod +x /tmp/install-solr-tomcat.sh \
-&& /tmp/install-solr-tomcat.sh ${SOLR_LANGUAGES}
+&& /tmp/install-solr-tomcat.sh ${SOLR_LANGUAGES} \
+&& rm /tmp/install-solr-tomcat.sh
 
 # uninstall previously temporary installed unzip
 if [ "$UNZIP_UNINSTALL" -eq 1 ]; then
