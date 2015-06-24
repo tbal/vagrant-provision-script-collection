@@ -37,6 +37,7 @@ fi
 echo "Running ${SOLR_TOMCAT_INSTALL_SCRIPT} (languages: ${SOLR_LANGUAGES}) ..."
 cat $SOLR_TOMCAT_INSTALL_SCRIPT \
 | sed -e "s/tomcat6/tomcat${TOMCAT_VERSION}/g" -e 's/clear//g' -e 's/unzip -q/unzip -oq/g' -e 's/wget /wget -N /g' -e 's/ | progressfilt//g' \
+  -e "s/mirror.dkd.de\/apache\/lucene\/solr/archive.apache.org\/dist\/lucene\/solr/g" \
 > /tmp/install-solr-tomcat.sh \
 && chmod +x /tmp/install-solr-tomcat.sh \
 && /tmp/install-solr-tomcat.sh ${SOLR_LANGUAGES}
