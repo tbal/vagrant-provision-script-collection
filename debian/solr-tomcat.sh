@@ -35,17 +35,34 @@ fi
 
 # run installation script
 echo "Running ${SOLR_TOMCAT_INSTALL_SCRIPT} (languages: ${SOLR_LANGUAGES}) ..."
+# do some adjustments on install script for better output
 cat $SOLR_TOMCAT_INSTALL_SCRIPT \
 | sed -e "s/tomcat6/tomcat${TOMCAT_VERSION}/g" -e 's/clear//g' -e 's/unzip -q/unzip -oq/g' -e 's/wget /wget -N /g' -e 's/ | progressfilt//g' \
 > /tmp/install-solr-tomcat.sh \
-&& chmod +x /tmp/install-solr-tomcat.sh \
-&& /tmp/install-solr-tomcat.sh ${SOLR_LANGUAGES} \
-&& rm /tmp/install-solr-tomcat.sh
+&& chmod +x /tmp/install-solr-tomcat.sh
+
+# actually run the install script and check if it failed
+set +e
+/tmp/install-solr-tomcat.sh ${SOLR_LANGUAGES}
+CHECK=$?
+set -e
+SOLR_TOMCAT_INSTALL_SCRIPT_ERROR=0
+if [ $CHECK -ne "0" ]; then
+    # install script failed
+    SOLR_TOMCAT_INSTALL_SCRIPT_ERROR=1
+fi
+
+rm /tmp/install-solr-tomcat.sh
 
 # uninstall previously temporary installed unzip
 if [ "$UNZIP_UNINSTALL" -eq 1 ]; then
     apt-get purge -qq unzip > /dev/null 2>&1
     echo "Removed unzip."
+fi
+
+if [ "$SOLR_TOMCAT_INSTALL_SCRIPT_ERROR" -eq 1 ]; then
+    echo "An error occured during install script execution. Aborting."
+    exit 1
 fi
 
 
