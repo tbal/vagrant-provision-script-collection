@@ -1,0 +1,1 @@
+../debian-8/php-phpinfo.sh
