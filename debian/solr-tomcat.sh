@@ -75,7 +75,7 @@ sed -i "s,solr\.log=.*$,solr.log=${SOLR_LOG_DIR},g" /usr/share/tomcat${TOMCAT_VE
 
 
 if [ "$SOLR_TOMCAT_ENABLE_REMOTE_ACCESS" -eq "1" ]; then
-    echo ">>> Setting solr (actually tomcat) to allow remote access"
+    echo ">>> Setting solr (actually tomcat) to allow remote access (http://<your-domain>:8080/solr/)"
     ADDRESS="0.0.0.0"
 else
     echo ">>> Setting solr (actually tomcat) to allow access from localhost only"
