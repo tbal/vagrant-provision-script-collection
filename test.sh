@@ -99,9 +99,11 @@ for SCRIPT in $SCRIPTS; do
         # show output depending on VERBOSE variable
         [ "$VERBOSE" -eq 1 ] || exec >/dev/null 2>&1
 
+        [ ! -z "$TERM" ] && DOCKER_RUN_OPTS="-t -i"
+
         # actually run prepared command in docker container
         docker run \
-            -t -i \
+            $DOCKER_RUN_OPTS \
             --rm \
             -v "$DOCKER_MOUNT_HOST":"$DOCKER_MOUNT_GUEST" \
             $DOCKER_CONTAINER \
