@@ -9,6 +9,7 @@ CURRENT_DIR="$(readlink -f `dirname $0`)"
 [ -z "$DOCKER_CMD_BEFORE"       ] && DOCKER_CMD_BEFORE=
 [ -z "$DOCKER_CMD_AFTER"        ] && DOCKER_CMD_AFTER=
 [ -z "$DOCKER_UPDATE_APT_INDEX" ] && DOCKER_UPDATE_APT_INDEX=0
+[ -z "$EXIT_ON_FIRST_FAIL"      ] && EXIT_ON_FIRST_FAIL=0
 
 
 function show_help() {
@@ -23,6 +24,14 @@ function show_help() {
   -u  Runs 'apt-get update' before executing actual files.
       Same as: ./$(basename "$0") -b 'apt-get update > /dev/null' [<files>]
   -h  Print this help."
+}
+
+
+HAS_FAILED_TEST=0
+TEST_SUMMARY=
+function print_summary() {
+    echo -e "\n\n########## TEST SUMMARY ##########"
+    echo -e $TEST_SUMMARY
 }
 
 
@@ -112,9 +121,28 @@ for SCRIPT in $SCRIPTS; do
 
     # print test result
     if [ $? -eq 0 ]; then
-        echo -e "\033[32mTest for '$SCRIPT' was successful.\033[m"
+        TEST_PASS="\033[32mTest for '$SCRIPT' was successful.\033[m"
+        TEST_SUMMARY="${TEST_SUMMARY}${TEST_PASS}\n"
+
+        echo -e $TEST_PASS
     else
-        echo -e "\033[31mERROR: Test execution of '$SCRIPT' failed!\033[m" 1>&2
-        exit 1
+        HAS_FAILED_TEST=1
+        TEST_FAIL="\033[31mERROR: Test execution of '$SCRIPT' failed!\033[m" 1>&2
+        TEST_SUMMARY="${TEST_SUMMARY}${TEST_FAIL}\n"
+
+        echo -e $TEST_FAIL
+
+        if [ $EXIT_ON_FIRST_FAIL -eq 1 ]; then
+            print_summary
+            exit 1
+        fi
     fi
+
 done
+
+
+print_summary
+
+if [ $HAS_FAILED_TEST -eq 1 ]; then
+    exit 1
+fi
