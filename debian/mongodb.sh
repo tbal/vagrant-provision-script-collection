@@ -25,7 +25,7 @@ fi
 apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 
 # create a source list file for MongoDB
-echo "$MONGODB_SOURCES_LIST_LINE" | tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+echo "$MONGODB_SOURCES_LIST_LINE" | tee "/etc/apt/sources.list.d/mongodb-org.list"
 apt-get update
 
 # install the MongoDB packages
