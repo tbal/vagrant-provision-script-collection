@@ -32,10 +32,10 @@ echo ">>> Creating mysql database '$TYPO3_DB_NAME' and user '$TYPO3_DB_USER'"
 if [ -d "/var/lib/mysql/$TYPO3_DB_NAME" ]; then
     echo "Database already exists. We expect that the user also already exists (without checking further)."
 else
-    MYSQL_QUERY="CREATE DATABASE $TYPO3_DB_NAME CHARACTER SET utf8; \
-        CREATE USER '$TYPO3_DB_USER'@'%' IDENTIFIED BY '$TYPO3_DB_PASSWORD'; \
-        GRANT USAGE ON *.* TO '$TYPO3_DB_USER'@'%' IDENTIFIED BY '$TYPO3_DB_PASSWORD'; \
-        GRANT ALL PRIVILEGES ON $TYPO3_DB_NAME.* TO '$TYPO3_DB_USER'@'%';"
+    MYSQL_QUERY="CREATE DATABASE \`$TYPO3_DB_NAME\` CHARACTER SET utf8; \
+        CREATE USER \`$TYPO3_DB_USER\`@'%' IDENTIFIED BY '$TYPO3_DB_PASSWORD'; \
+        GRANT USAGE ON *.* TO \`$TYPO3_DB_USER\`@'%' IDENTIFIED BY '$TYPO3_DB_PASSWORD'; \
+        GRANT ALL PRIVILEGES ON \`$TYPO3_DB_NAME\`.* TO \`$TYPO3_DB_USER\`@'%';"
 
     if [ -z "$MYSQL_ROOT_PASSWORD" ]; then
         mysql -uroot -e "$MYSQL_QUERY"
