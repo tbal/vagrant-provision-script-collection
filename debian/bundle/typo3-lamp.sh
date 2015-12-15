@@ -58,7 +58,7 @@ apt-get install -qq $INSTALL_PHP_MODULES
 
 # link apache vhost
 echo ">>> Linking projects apache vhost config if it exists"
-VHOST_LINK_DESTINATION="/etc/apache2/sites-enabled/$PROJECT_VHOST_NAME"
+VHOST_LINK_DESTINATION="/etc/apache2/sites-enabled/${PROJECT_VHOST_NAME}.conf"
 [ -f "$PROJECT_VHOST_FILE" ] && [ ! -f "$VHOST_LINK_DESTINATION" ] \
     && ln -fs "$PROJECT_VHOST_FILE" "$VHOST_LINK_DESTINATION"
 
