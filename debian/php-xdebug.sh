@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
-[ -z "$XDEBUG_CONFIG_FILE"   ] && XDEBUG_CONFIG_FILE="/etc/php5/conf.d/xdebug.ini"
-[ -z "$XDEBUG_CONFIG_PARAMS" ] && XDEBUG_CONFIG_PARAMS="xdebug.remote_enable=true xdebug.remote_connect_back=1 xdebug.max_nesting_level=500"
+[ -z "$XDEBUG_IDEKEY"        ] && XDEBUG_IDEKEY="IDEA"
 [ -z "$XDEBUG_ENV_FILE"      ] && XDEBUG_ENV_FILE="/etc/profile.d/xdebug.sh"
-[ -z "$XDEBUG_ENV_PARAMS"    ] && XDEBUG_ENV_PARAMS="PHP_IDE_CONFIG=\"serverName=\${DOMAINS%% *}\" XDEBUG_CONFIG=\"remote_connect_back=0 remote_host=\$(netstat -rn | awk '{print \$2;}' | sed -n '3p') idekey=IDEA\""
+[ -z "$XDEBUG_ENV_PARAMS"    ] && XDEBUG_ENV_PARAMS="PHP_IDE_CONFIG=\"serverName=\${DOMAINS%% *}\" XDEBUG_CONFIG=\"idekey=${XDEBUG_IDEKEY}\""
+[ -z "$XDEBUG_CONFIG_FILE"   ] && XDEBUG_CONFIG_FILE="/etc/php5/conf.d/xdebug.ini"
+[ -z "$XDEBUG_CONFIG_PARAMS" ] && XDEBUG_CONFIG_PARAMS="
+xdebug.remote_enable=true
+xdebug.remote_autostart=0
+xdebug.remote_connect_back=0
+xdebug.max_nesting_level=500
+xdebug.remote_host=$(netstat -rn | awk '{print $2;}' | sed -n '3p')
+xdebug.idekey=${XDEBUG_IDEKEY}"
 
 
 
