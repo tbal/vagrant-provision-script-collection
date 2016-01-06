@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 set -e
 
+# install net-tools temporary if missing
+NETTOOLS_UNINSTALL=0
+if [ ! $(which netstat) ]; then
+    echo "netstat required for determining xdebug.remote_host value. Temporary installing net-tools ..."
+    apt-get install -qq net-tools > /dev/null 2>&1
+    NETTOOLS_UNINSTALL=1
+fi
+
+
 [ -z "$XDEBUG_IDEKEY"        ] && XDEBUG_IDEKEY="IDEA"
 [ -z "$XDEBUG_ENV_FILE"      ] && XDEBUG_ENV_FILE="/etc/profile.d/xdebug.sh"
 [ -z "$XDEBUG_ENV_PARAMS"    ] && XDEBUG_ENV_PARAMS="PHP_IDE_CONFIG=\"serverName=\${DOMAINS%% *}\" XDEBUG_CONFIG=\"idekey=${XDEBUG_IDEKEY}\""
@@ -12,6 +21,13 @@ xdebug.remote_connect_back=0
 xdebug.max_nesting_level=500
 xdebug.remote_host=$(netstat -rn | awk '{print $2;}' | sed -n '3p')
 xdebug.idekey=${XDEBUG_IDEKEY}"
+
+
+# uninstall previously temporary installed net-tools
+if [ "$NETTOOLS_UNINSTALL" -eq 1 ]; then
+    apt-get purge -qq net-tools > /dev/null 2>&1
+    echo "Removed net-tools."
+fi
 
 
 
