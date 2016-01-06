@@ -32,5 +32,7 @@ echo $XDEBUG_CONFIG_PARAMS | sed 's/ /\n/g'
 
 echo ">>> Setting xdebug environment variables"
 echo "export $XDEBUG_ENV_PARAMS" > "$XDEBUG_ENV_FILE"
-
 echo $XDEBUG_ENV_PARAMS
+
+echo ">>> Adding alias command 'curl_xdebug' for xdebug enabled curl requests"
+echo "alias curl_xdebug=\"curl -b \\\"XDEBUG_SESSION=${XDEBUG_IDEKEY}\\\"\"" >> "$XDEBUG_ENV_FILE"
