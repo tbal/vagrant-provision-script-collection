@@ -3,7 +3,7 @@ set -e
 
 [ -z "$TOMCAT_VERSION"                   ] && TOMCAT_VERSION=7
 [ -z "$SOLR_TOMCAT_PROJECT_ROOT_DIR"     ] && SOLR_TOMCAT_PROJECT_ROOT_DIR="/vagrant/"
-[ -z "$SOLR_TOMCAT_INSTALL_SCRIPT"       ] && SOLR_TOMCAT_INSTALL_SCRIPT="${SOLR_TOMCAT_PROJECT_ROOT_DIR}htdocs/typo3conf/ext/solr/Resources/Shell/install-solr-existing-tomcat.sh"
+[ -z "$SOLR_TOMCAT_INSTALL_SCRIPT"       ] && SOLR_TOMCAT_INSTALL_SCRIPT="${SOLR_TOMCAT_PROJECT_ROOT_DIR}htdocs/typo3conf/ext/solr/Resources/Install/install-solr-existing-tomcat.sh"
 [ -z "$SOLR_TOMCAT_INSTALL_DIR"          ] && SOLR_TOMCAT_INSTALL_DIR="/opt/solr-tomcat/"
 [ -z "$SOLR_TOMCAT_ENABLE_REMOTE_ACCESS" ] && SOLR_TOMCAT_ENABLE_REMOTE_ACCESS=0 # 0=localhost only, 1=remote access allowed
 [ -z "$SOLR_LANGUAGES"                   ] && SOLR_LANGUAGES="german" # separated by whitespace, see EXT:solr for supported languages
