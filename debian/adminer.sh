@@ -22,7 +22,7 @@ fi
 # download adminer and it's skin to target install directory
 mkdir -p "$ADMINER_INSTALL_DIR"
 curl -f -L -o "${ADMINER_INSTALL_DIR}/index.php" \
-     "http://downloads.sourceforge.net/adminer/adminer-${ADMINER_VERSION}.php"
+     "http://www.adminer.org/static/download/${ADMINER_VERSION}/adminer-${ADMINER_VERSION}.php"
 curl -f -L -o "${ADMINER_INSTALL_DIR}/adminer.css" "$ADMINER_SKIN_URL"
 echo "Installed adminer to ${ADMINER_INSTALL_DIR}/."
 
